@@ -89,6 +89,35 @@ Forest and cropland dominate - consistent with the Black Forest to the east and 
 - **CORINE resolution mismatch** - CORINE is at 100m resolution while Landsat is at 30m. Nearest-neighbour resampling during reprojection introduces label noise at land cover boundaries, particularly between forest/cropland edges.
 - **Training sample cap** - 500,000 pixels were randomly subsampled from 17.4M available labeled pixels to avoid RAM constraints. Stratified subsampling per class would better preserve minority class representation.
 
+## Running with Docker
+
+Docker handles the Python environment so you don't need to install any dependencies locally.
+
+### Prerequisites
+Download the following files before running:
+
+1. **Landsat 8 scene** from USGS EarthExplorer (earthexplorer.usgs.gov)
+   - Dataset: Landsat Collection 2 Level-1
+   - Scene ID: LC08_L1TP_195026_20230601_20230607_02_T1
+   - Place all band files in `data/`
+
+2. **CORINE Land Cover 2018** from Copernicus (land.copernicus.eu)
+   - File: U2018_CLC2018_V2020_20u1.tif
+   - Place in `data/`
+
+### Build the image
+```bash
+docker build -t rhine-classifier .
+```
+
+### Run with volumes
+```bash
+docker run \
+  -v /path/to/your/data:/app/data \
+  -v /path/to/your/outputs:/app/outputs \
+  -e TRAIN=True \
+  rhine-classifier
+```
 ## Data Licenses
 
 - Landsat 8 imagery: USGS public domain
