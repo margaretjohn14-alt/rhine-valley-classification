@@ -1,0 +1,21 @@
+# Large data files - too big for GitHub
+data/*.TIF
+data/*.tif
+data/*.txt
+data/*.json
+data/*.xml
+data/*.jpeg
+
+# CORINE download folder
+Results/
+
+# Landsat data
+data/
+
+# Large numpy outputs
+outputs/*.npy
+outputs/ndvi.tif
+
+# Keep these
+!outputs/classification_map.png
+!outputs/classified.tif
